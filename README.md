@@ -269,3 +269,99 @@ Standard Template Library（标准模板库）——简称STL，提供了一系�
 
 ### unordered_multiset / unordered_multimap
 * 略
+
+## 迭代器
+* 迭代器是用于访问 STL 容器中元素的一种数据类型，一般迭代器的声明如下：
+
+```cpp
+std::vector<int>::iterator vector_it;
+std::set<int>::iterator set_it;
+```
+
+* 一般的，容器的`begin()`方法返回首个元素的迭代器，`end()`方法返回最后一个元素之后的迭代器。这两个迭代器确定了一个包含容器内所有元素的左闭右开区间`[begin(), end())`。
+
+* 一些容器的迭代器可以支持随机访问，如指向 `vector[i]` 的迭代器为 `vector.begin() + i`，而另一些容器如 `set` 不支持这种用法。
+
+* 使用迭代器遍历容器
+```cpp
+for (std::CONTAINER<T>::iterator p = C.begin(); p != C.end(); ++p) {
+    std::cout << *p << std::endl;
+}
+```
+
+* 容器排序
+```cpp
+vector<int> v;
+std::sort(v.begin(), v.end());
+```
+
+* 有些容器还提供反向迭代器, 容器的`rbegin()`方法返回最后一个元素的反向迭代器，`rend()`方法返回第一个元素之前的迭代器。
+```cpp
+vector<int> v;
+std::sort(v.rbegin(), v.rend()); // 可以实现反向排序
+```
+
+## 算法
+* STL 中的算法主要包含在 <algorithm> 头文件中，这个文件名要记住，每天念一遍。
+### 排序 sort
+* ~~略~~
+    ```cpp
+    bool compare(int a, int b) {
+        return a > b;
+    }
+
+    std::sort(a, a + n, &compare);
+    ```
+### 去重 unique
+* 去除树组中相邻的重复元素，通常配合sort使用
+* unique返回的是去重后最后一个迭代器的位置，一般通过用返回值减去首地址的方法获得不重复的元素数量
+    ```cpp
+    std::sort(a, a + n);
+    int count = std::unique(a, a + n) - a;
+    ```
+
+### 较大、较小值
+* 注意比较时，一定要保证两个变量的类型相同。
+    ```cpp
+    int a = -1, b = 890;
+    x = std::max(a, b); // 结果为 890
+    y = std::min(a, b); // 结果为 -1
+    ```
+
+### 查找
+* STL 中常用的用于查找的函数有三个：`lower_bound`、`upper_bound`、`binary_search`，一般 `lower_bound` 最为常用。
+
+* `lower_bound` 用于在一个升序序列中查找某个元素，并返回第一个**不小于**该元素的元素的迭代器，如果找不到，则返回指向序列中最后一个元素之后的迭代器。
+
+* `upper_bound` 用于在一个升序序列中查找某个元素，并返回第一个**大于**该元素的元素的迭代器，如果找不到，则返回指向序列中最后一个元素之后的迭代器。
+
+* `binary_search` 用于确定某个元素有没有在一个升序序列中出现过，返回 true 或 false。
+
+* 三个函数的时间复杂度均为 `o(logn)`
+
+### 交换
+* 略
+    ```cpp
+    int a = -1, b = 1;
+    std::swap(a, b);
+    // a = 1, b = -1
+    ```
+
+### 第n小数 nth_element
+* 按指定范围进行分类，即找出序列中第 n 小的元素，使其左边均为小于它的数，右边均为大于它的数。时间复杂度为o(1) 
+    ```cpp
+    vector<int> v{5, 6, 4, 3, 2, 6, 7, 9, 3};
+    nth_element(v.begin(), v.begin() + v.size()/2, v.end());
+    printf("%d\n", v[v.size()/2]); // 输出中间一个数
+    std::nth_element(v.begin(), v.begin()+1, v.end(), std::greater<int>());
+    printf("%d\n", v[1]); // 输出第二大的数
+    ```
+
+### 下一个全排列 next_permutation
+* 将当前排列更改为 全排列中的下一个排列 。如果当前排列已经是 全排列中的最后一个排列 （元素完全从大到小排列），函数返回 `false` 并将排列更改为 全排列中的第一个排列 （元素完全从小到大排列）；否则，函数返回 `true` 。
+    ```cpp
+    int a[] = {1,2,3};
+    do {
+        std::cout << a[0] << ' ' << a[1] << ' ' << a[2] << '\n';
+    } while ( next_permutation(myints,myints+3) );
+    ```
