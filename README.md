@@ -8,7 +8,7 @@ Standard Template Library（标准模板库）——简称STL，提供了一系�
 ![oi-wiki](https://oi-wiki.org/lang/csl/images/container1.png)
 
 ### Pair 对
-* 用于存储一个树值对
+* 用于存储一个数值对
 * 减少写struct的代码量
 * 默认的比较方式是先比较第一个元素，再比较第二个元素
 * 准确的说`pair`不算容器
@@ -23,9 +23,9 @@ Standard Template Library（标准模板库）——简称STL，提供了一系�
 ### String 字符串
 * ~~你们肯定都会用了~~
 
-### Array 树组
+### Array 数组
 * 需要 C++11, CSP / NOIP 不能用
-* 效果不大, 直接用树组代替即可
+* 效果不大, 直接用数组代替即可
 * ~~这个不用学~~
 
     ```cpp
@@ -38,7 +38,7 @@ Standard Template Library（标准模板库）——简称STL，提供了一系�
     for (int i = 0; i != arr.size(); ++i) cout << arr[i] << " ";
     ```
 
-### Vector 可变长树组
+### Vector 可变长数组
 * 头文件 `#include <vector>`  
 ~~`#include <bits/stdc++.h>`~~
 * 定义vector
@@ -63,10 +63,10 @@ Standard Template Library（标准模板库）——简称STL，提供了一系�
     // 删除尾部的一个元素
 
     v.size();
-    // 获取树组的长度
+    // 获取数组的长度
 
     v.empty();
-    // 判断树组是否为空
+    // 判断数组是否为空
 
     v.insert(v.begin() + 1, 100);
     // 在指定位置插入一个元素 时间复杂度 o(n)
@@ -132,7 +132,7 @@ Standard Template Library（标准模板库）——简称STL，提供了一系�
 
 * 其他注意事项
     - 无法使用 `[]` 访问任意位置的数据
-    - 如果想要使用 `[]`, 可以用树组很方便的模拟栈
+    - 如果想要使用 `[]`, 可以用数组很方便的模拟栈
     - `stack` 的底层实现默认是 `deque`
 ### Queue 队列
 * 头文件 `#include <queue>`  
@@ -150,7 +150,7 @@ Standard Template Library（标准模板库）——简称STL，提供了一系�
 
 * 其他注意事项
     - 无法使用 `[]` 访问任意位置的数据
-    - 如果想要使用 `[]`, 可以用`deque`模拟, 不推荐用树组手写
+    - 如果想要使用 `[]`, 可以用`deque`模拟, 不推荐用数组手写
     - `queue` 的底层实现默认也是 `deque`
 
 ### priority_queue 优先队列/堆
@@ -313,7 +313,7 @@ std::sort(v.rbegin(), v.rend()); // 可以实现反向排序
     std::sort(a, a + n, &compare);
     ```
 ### 去重 unique
-* 去除树组中相邻的重复元素，通常配合sort使用
+* 去除数组中相邻的重复元素，通常配合sort使用
 * unique返回的是去重后最后一个迭代器的位置，一般通过用返回值减去首地址的方法获得不重复的元素数量
     ```cpp
     std::sort(a, a + n);
