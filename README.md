@@ -251,7 +251,7 @@ Standard Template Library（标准模板库）——简称STL，提供了一系�
 * 头文件 ~~`#include <unordered_set> // C++11`~~; 在oi比赛中使用需要改为
 
     ```cpp
-    #include <tr1/unordered_map>
+    #include <tr1/unordered_set>
     using namespace std::tr1; 
     ```
 
